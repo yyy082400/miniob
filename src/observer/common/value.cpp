@@ -120,6 +120,13 @@ void Value::set_data(char *data, int length)
       value_.int_value_ = *(int *)data;
       length_           = length;
     } break;
+    // ▼▼▼ 修改开始：加上 DATE ▼▼▼
+    case AttrType::DATE: 
+    // ▲▲▲ 修改结束 ▲▲▲
+    case AttrType::INTS: {
+      value_.int_value_ = *(int *)data;
+      length_           = length;
+    } break;
     case AttrType::FLOATS: {
       value_.float_value_ = *(float *)data;
       length_             = length;
@@ -197,6 +204,13 @@ void Value::set_value(const Value &value)
     case AttrType::INTS: {
       set_int(value.get_int());
     } break;
+    // ▼▼▼ 修改开始：在这里插入 ▼▼▼
+    case AttrType::DATE: {
+      set_int(value.get_int());
+    } break;
+    // ▲▲▲ 修改结束 ▲▲▲
+
+
     case AttrType::FLOATS: {
       set_float(value.get_float());
     } break;
@@ -261,6 +275,9 @@ int Value::get_int() const
     case AttrType::INTS: {
       return value_.int_value_;
     }
+    // ▼▼▼ 修改开始：加上 DATE ▼▼▼
+    case AttrType::DATE:
+    // ▲▲▲ 修改结束 ▲▲▲
     case AttrType::FLOATS: {
       return (int)(value_.float_value_);
     }
